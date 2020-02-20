@@ -1,3 +1,3 @@
 # code-education-docker-laravel
 
-https://hub.docker.com/repository/docker/renatoneto/laravel-fpm
+https://hub.docker.com/r/renatoneto/laravel-fpm
