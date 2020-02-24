@@ -15,7 +15,7 @@ RUN chmod 775 storage -R
 RUN chmod 775 bootstrap/cache
 
 RUN rm -rf /var/www/html
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 EXPOSE 9000
 
