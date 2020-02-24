@@ -1,0 +1,53 @@
+steps:
+  - name: 'gcr.io/$PROJECT_ID/docker-compose'
+    id: Executando docker-compose
+    args:
+      - 'up'
+      - '-d'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Instalando dependencias via composer
+    args:
+      - 'exec'
+      - '-t'
+      - 'app'
+      - 'composer'
+      - 'install'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Copiando .env
+    args:
+      - 'exec'
+      - '-t'
+      - 'app'
+      - 'cp'
+      - '.env.example'
+      - '.env'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Criando chave
+    args:
+      - 'exec'
+      - '-t'
+      - 'app'
+      - 'php'
+      - 'artisan'
+      - 'key:generate'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Executando migrations
+    args:
+      - 'exec'
+      - '-t'
+      - 'app'
+      - 'php'
+      - 'artisan'
+      - 'migrate'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Executando testes
+    args:
+      - 'exec'
+      - '-t'
+      - 'app'
+      - 'vendor/bin/phpunit'
